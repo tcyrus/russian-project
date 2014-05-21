@@ -1,7 +1,11 @@
 import os
 from flask import Flask,session,request,render_template,redirect,url_for
+from flask.ext.login import (LoginManager, current_user, login_required,
+                            login_user, logout_user, UserMixin, confirm_login, fresh_login_required)
 
-app = Flask(__name__)
+tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),'templates')
+
+app = Flask(__name__,template_folder=tmpl_dir)
 app.config.from_object(__name__)
 
 app.config.update(dict(
@@ -10,31 +14,39 @@ app.config.update(dict(
     USERNAME='admin',
     PASSWORD='default'
 ))
+
 app.config.from_envvar('MAIN_SETTINGS',silent=True)
+login_manager=LoginManager()
+login_manager.init_app(app)
+
+@login_manager.user_loader
+def load_user(userid):
+    return User.get(userid)
 
 @app.route('/',methods=['GET','POST'])
 def home():
-  return render_template('site/index.html')
+  return render_template('index.html',login=current_user.is_authenticated())
 
-@app.route('/login', methods=['GET','POST'])
+@app.route('/login',methods=['GET','POST'])
 def login():
-    error=None
-    if request.method=='POST':
-        if request.form['username']!=app.config['USERNAME']:
-            error='Invalid username'
-        elif request.form['password']!=app.config['PASSWORD']:
-            error='Invalid password'
-        else:
-            session['logged_in']=True
-            flash('You were logged in')
-            return redirect(url_for('show_entries'))
-    return render_template('login.html',error=error)
+    form=LoginForm()
+    if form.validate_on_submit():
+        # login and validate the user...
+        login_user(user)
+        flash("Logged in successfully.")
+        return redirect(url_for("dashboard"))
+    return render_template("login.html",form=form)
 
-@app.route('/logout')
+@app.route("/settings")
+@login_required
+def settings():
+    pass
+
+@app.route("/logout")
+@login_required
 def logout():
-    session.pop('logged_in',None)
-    flash('You were logged out')
-    return redirect(url_for('home'))
+    logout_user()
+    return redirect(url_for("home"))
 
 @app.route('/dashboard',methods=['GET','POST'])
 def dashboard():
