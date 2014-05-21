@@ -1,7 +1,6 @@
 import os
 from flask import Flask,session,request,render_template,redirect,url_for
-from flask.ext.login import (LoginManager, current_user, login_required,
-                            login_user, logout_user, UserMixin, confirm_login, fresh_login_required)
+from flask.ext.login import LoginManager,current_user,login_required,login_user,logout_user,UserMixin,confirm_login,fresh_login_required
 
 tmpl_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)),'templates')
 
@@ -29,13 +28,13 @@ def home():
 
 @app.route('/login',methods=['GET','POST'])
 def login():
-    form=LoginForm()
-    if form.validate_on_submit():
-        # login and validate the user...
+  if request.method=='POST':
+    if request.form.validate_on_submit():
         login_user(user)
         flash("Logged in successfully.")
         return redirect(url_for("dashboard"))
-    return render_template("login.html",form=form)
+  else:
+    return render_template("login.html")
 
 @app.route("/settings")
 @login_required
