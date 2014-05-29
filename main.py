@@ -51,8 +51,24 @@ def login():
             flash("You have logged in")
             return redirect(url_for("dashboard"))
       error="Login failed"
-  else:
-    return render_template("login.html",error=error)
+  return render_template("login.html",error=error)
+
+@app.route('/register',methods=['GET','POST'])
+def register():
+   error=None
+   if request.method=='POST':
+      username=request.form['username']
+      password=request.form['password']
+      user=User(username,password)
+      db.session.add(user)
+      db.session.commit()
+      if user:
+        if login_user(DbUser(user)):
+          # do stuff
+          flash("You have registered in")
+          return redirect(url_for("dashboard"))
+      error="Register failed"
+   return render_template("register.html",error=error)
 
 @app.route("/settings")
 @login_required
