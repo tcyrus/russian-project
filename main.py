@@ -14,7 +14,7 @@ login_manager.init_app(app)
 # User class
 class DbUser(object):
     """Wraps User object for Flask-Login"""
-    def __init__(self, user):
+    def __init__(self,user):
         self._user=user
     def get_id(self):
         return unicode(self._user.id)
@@ -74,4 +74,4 @@ def dashboard():
     return render_template("dashboard.html")
 
 if __name__=='__main__':
-    app.run()
+    app.run(port=5555)
