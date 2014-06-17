@@ -2,20 +2,14 @@
 #1 = 35A49C
 #2 = 79CDC0
 */
-a {
-	color: #35A49C;
-}
-a:hover {
-	color: #79CDC0;
-}
+a {color:#35A49C;}
+a:hover {color:#79CDC0;}
 
 /* menu */
-.nav>li>a:hover {
-	color: #79CDC0;
-}
+.nav>li>a:hover {color:#79CDC0;}
 
 .navbar .navbar-nav > .active > a {
-	color: #79CDC0;
+	color:#79CDC0;
 }
 
 /* flexslider */
@@ -41,12 +35,6 @@ a:hover {
 	box-shadow: 0 0 0 8px  #79CDC0;
 }
 
-
-/* portfolio */
-.portfolio-item .portfolio-desc {
-	background: #35A49C;
-}
-
 /* btn */
 .btn-theme {
   background: #79CDC0;
@@ -61,18 +49,4 @@ a:hover {
 
 .btn-cta:focus,.btn-cta:active{
    border-color: #35A49C;
-}
-
-/* contact */
-.validation {
-	color:#35A49C;
-}
-
-/* footer */
-.social-circle li a {
-	background:#35A49C;
-}
-
-a.scrollup{
-	background:#35A49C;
 }

@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+    .a {
+        //margin-left: 20px;
+        width: 500px;
+        //margin-bottom: 20px;
+    }
+   .hint {
+       display:none;
+   }
+   .well {
+       color:black;
+   }
+   label {
+       width:100%;
+   }
+</style>
+{% endblock %}
+{% block content %}
+<section class="questions">
+	<div class="container">
+		<div class="row mar-bot40">
+			<div class="col-md-6 col-md-offset-3">
+				<div class="align-center">
+					<h2 class="slogan">Русский Практика</h2>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="well">
+    <form method="POST" action="">
+        <label title="Hello! My name is Boris. What is your name?">Привет! Меня зовут Борис. Как вас зовут?
+            <input type="text" class="a form-control" name="name">
+        </label>
+        <label title="Nice to meet you! I live in the US. Where do you live?">Очень приятно! я живу в Штатах. Где вы живете?
+            <input type="text" class="a form-control" name="live">
+        </label>
+        <label title="Great! I am sixteen. How old are you?">Хорошо! Мне шестнадцать лет. Сколько вам лет?
+            <input type="text" class="a form-control" name="age">
+        </label>
+        <label title="What time is it?">Сколько сейчас времени?
+            <input type="text" class="a form-control" name="time">
+        </label>
+        <input type="submit" class="form-control" value="представлять" id="submit">
+
+    </form>
+</div>
+</section>
+{% endblock %}

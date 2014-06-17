@@ -1,0 +1,79 @@
+{% extends "base.html" %}
+{% block head %}
+<style>
+    .tab-content.hide {
+        display: none;
+    }
+    .tab-content.active{
+        display: block;
+    }
+</style>
+{% endblock %}
+{% block content %}
+<section class="dashboard">
+        <div class="container">
+                <div class="row mar-bot40">
+                        <div class="col-md-6 col-md-offset-3">
+                               <div class="align-center">
+					<h2 class="slogan">Карточек</h2>
+                                </div>
+                        </div>
+                </div>
+        </div>
+        <div class="well">
+            <div>
+                <ul class="nav nav-tabs">
+                    <li class="active">
+                    <a href="#tab1">Questions</a>
+                    </li>
+                    <li>
+                    <a href="#tab2">City Vocab</a>
+                    </li>
+                    <li>
+                    <a href="#tab3">Conjugations</a>
+                    </li>
+                    <li>
+                    <a href="#tab4">Seasons</a>
+                </ul>
+            </div>
+            <section id="tab1" class="tab-content active">
+                <div>
+                    <iframe src="https://quizlet.com/44485412/flashcards/embedv2" height="410" width="100%" style="border:0;"></iframe>
+                </div>
+            </section>
+            <section id="tab2" class="tab-content hide">
+                <div>
+                    <iframe src="https://quizlet.com/40028510/flashcards/embedv2" height="410" width="100%" style="border:0;"></iframe>
+                </div>
+            </section>
+            <section id="tab3" class="tab-content hide">
+                <div>
+                    <iframe src="https://quizlet.com/36048438/flashcards/embedv2" height="410" width="100%" style="border:0;"></iframe>
+                </div>
+            </section>
+            <section id="tab4" class="tab-content hide">
+                <div>
+                    <iframe src="https://quizlet.com/44507668/flashcards/embedv2" height="410" width="100%" style="border:0;"></iframe>
+                </div>
+            </section>    
+        </div>
+    </section>
+{% endblock %}
+{% block end %}
+    <script>
+        $(document).ready(function(){
+            $('.nav-tabs > li > a').click(function(event){
+            event.preventDefault();
+            var active_tab_selector = $('.nav-tabs > li.active > a').attr('href');
+            $(active_tab_selector).removeClass('active');
+            $(active_tab_selector).addClass('hide');
+            var actived_nav = $('.nav-tabs > li.active');
+            actived_nav.removeClass('active');
+            $(this).parents('li').addClass('active');
+            var target_tab_selector = $(this).attr('href');
+            $(target_tab_selector).removeClass('hide');
+            $(target_tab_selector).addClass('active');
+    });
+});
+    </script>
+{% endblock %}

@@ -2,9 +2,6 @@
 @import url('http://fonts.googleapis.com/css?family=Lato:400,300,700,900');
 /* === fontawesome === */
 @import url('font-awesome.css');
-/* ==== overwrite bootstrap standard ==== */
-@import url('overwrite.css');
-@import url('animate.css');
 /*==========================================================================
   General
   ========================================================================== */
@@ -64,7 +61,6 @@ a:hover {text-decoration:none;}
 	margin:0 !important;
 	padding:0;
 }
-.content,.container {overflow:hidden;}
 .trans {
 	border:0 !important;
 	background:0 !important;
@@ -155,77 +151,36 @@ section.section {
 	font-weight:700;
 }
 /*===========================
-  --- Header & menu ----
-=========================== */
-.navbar {
-	line-height: 100px;
-	height: 100px;
-	background-color: rgba(0,0,0,0.3);
-	display: block;
-	vertical-align: middle;
-	text-align: center;
-	margin-bottom: 0;
-	padding-bottom:0;
-}
-.navbar .navbar-collapse {
-	margin-bottom: 0;
-	padding-bottom:0;
-}
-.nav li {
-	height: 100%;
-	line-height: 100%;
-	margin-bottom: 0;
-	padding-bottom:0;
-}
-.nav>li>a {
-	display: table-cell;
-	height: 100%;
-	line-height: 100%;
-	vertical-align: middle;
-	color: #fff;
-	font-weight: 700;
-	font-size: 13px;
-	letter-spacing: .1em;
-	text-transform: uppercase;
-}
-.nav>li>a:hover {
-	color: #fff;
-	background: none;
-}
-.navbar-nav {
-	float: right;
-	margin-bottom: 0;
-	padding-bottom:0;
-}
-.navbar .navbar-nav > .active > a {color:#fff;}
-.navbar .navbar-nav > .active > a {padding-bottom:22px;}
-h1 a.navbar-brand {
-	font-size: 24px;
-	color: #fff;
-	font-weight: 900;
-	text-shadow: none;
-}
-.navbar-brand {
-	padding: 0;
-	display: table-cell;
-	vertical-align: middle;
-	line-height: 90px;
-}
-.navbar-brand img {vertical-align:middle;}
-.navbar-toggle {
-	padding: 0;
-	margin: 0;
-	width: 80px;
-}
-.navbar-collapse.in {margin-top:-5px !important;}
-/*===========================
   --- Featured section ----
 =========================== */
 section.featured {
-	padding: 200px 0 60px;
+	padding: 175px 0 60px;
 	background: #70B9B0;
 	color: #fdfdfd;
 }
+
+section.questions {
+        padding: 100px 0 0;
+        background: #70B9B0;
+        color: #fdfdfd;
+}
+section.questions h2.slogan {
+        color: #fff;
+        font-size: 48px;
+        font-weight: 900;
+}
+
+section.dashboard {
+        padding: 100px 0 0;
+        background: #70B9B0;
+        color: #fdfdfd;
+}
+section.dashboard h2.slogan {
+        color: #fff;
+        font-size: 48px;
+        font-weight: 900;
+}
+
 section.featured h2.slogan {
 	color: #fff;
 	font-size: 48px;
@@ -237,67 +192,6 @@ section.featured.inner {
 	padding:150px 0 50px;
 }
 /* --- Flexslider --- */
-.flexslider {
-	margin: 0;
-	background: 0;
-	border: 0;
-	box-shadow: none;
-	-webkit-box-shadow: none;
-}
-.flex-control-paging li a {
-	width:8px;
-	height:8px;
-}
-.flex-control-paging li a.flex-active {background:#fff;}
-.flex-control-nav {bottom:-25px;}
-.flexslider .slides img {
-	width:auto;
-	display:inline;
-}
-.flex-direction-nav a {
-	display: block;
-	width: 50px;
-	height: 98px;
-	margin: -29px -20px 0;
-	position: absolute;
-	top: 30%;
-	z-index: 10;
-	overflow: hidden;
-	opacity: 0;
-	cursor: pointer;
-	color: rgba(0,0,0,0.8);
-	text-shadow: 1px 1px 0 rgba(255,255,255,0.3);
-	-webkit-transition: all .3s ease;
-	-moz-transition: all .3s ease;
-	transition: all .3s ease;
-}
-.flex-direction-nav .flex-next {
-	right:-70px;
-	background:url(../img/arrow_large_right.png) no-repeat top left;
-}
-.flex-direction-nav .flex-prev {
-	left:-70px;
-	background:url(../img/arrow_large_left.png) no-repeat top left;
-}
-.flex-direction-nav a.flex-next:before {content:none !important;}
-/* removing default arrows */
-.flex-direction-nav a:before {content:none !important;}
-/* --- Revolution slider --- */
-.featured .fullwidthbanner ul {
-	list-style:none;
-	padding:0;
-}
-.tp-rightarrow.large {margin-left:0;}
-.tp-leftarrow.default {
-	width:49px !important;
-	height:98px !important;
-	background:url(../img/arrow_small_left.png) no-Repeat top left;
-}
-.tp-rightarrow.default {
-	width:49px !important;
-	height:98px !important;
-	background:url(../img/arrow_small_right.png) no-Repeat top left;
-}
 .fullwidthbanner-container {
 	padding-top:100px;
 	width:100% !important;
@@ -339,26 +233,6 @@ section.featured.inner {
 	border-style:none;
 }
 .fullwidthbanner a.btn {color:#fff;}
-/*===========================
-  --- Testimonial ----
-=========================== */
-#testimonals {
-	padding-top:20px;
-	padding-bottom:40px;
-	position:relative;
-	margin-top:50px;
-}
-.testimonial i {color:#fff;}
-.testimonial span.author {
-	color:#fff;
-	font-weight:700;
-}
-.testimonial h5 {
-	color:#fff;
-	font-size:18px;
-	font-family:Georgia, sans-serif;
-	line-height:1.5em;
-}
 /*====================
   Clients
 ==================== */
@@ -382,24 +256,6 @@ ul.footer-menu {
 ul.footer-menu li {
 	display:inline;
 	margin:0 5px;
-}
-a.scrollup{
-	height:32px;
-	width:32px;
-	color:#fff;
-	font-size:18px;
-	line-height:32px;
-	text-align:center;
-	text-decoration:none;
-	position:fixed;
-	bottom:10px;
-	right:10px;
-	z-index:9999;
-	opacity:.5;
-}
-a.scrollup:hover{
-	opacity:1;
-	color:#fff;
 }
 /*===========================
   --- Template Components ----

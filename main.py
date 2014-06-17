@@ -8,86 +8,52 @@ tmpl_dir=os.path.join(os.path.dirname(os.path.abspath(__file__)),'templates')
 app=Flask(__name__,template_folder=tmpl_dir)
 app.config.from_pyfile("config.py")
 db=SQLAlchemy(app)
-login_manager=LoginManager()
-login_manager.init_app(app)
 
-# User class
-class DbUser(object):
-    """Wraps User object for Flask-Login"""
-    def __init__(self,user):
-        self._user=user
-    def get_id(self):
-        return unicode(self._user.id)
-    def is_active(self):
-        return self._user.enabled
-    def is_anonymous(self):
-        return False
-    def is_authenticated(self):
-        return True
+class Response(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    q = db.Column(db.String(100))
+    content = db.Column(db.String(1000))
 
-@login_manager.user_loader
-def load_user(user_id):
-    user=User.query.get(user_id)
-    if user:
-        return DbUser(user)
-    else:
-        return None
+    def __init__(self, q, content):
+        self.content = content
+        self.q = q
 
-@app.route('/',methods=['GET','POST'])
+    def __repr__(self):
+        return '<Response %s>' % self.content
+
+@app.route('/')
 def home():
-  return render_template('index.html',login=current_user.is_authenticated())
+  return render_template('index.html')
 
-@app.route('/login',methods=['GET','POST'])
-def login():
-  error=None
-  if request.method=='POST':
-      username=request.form['username']
-      password=request.form['password']
-      if authenticate(app.config['AUTH_SERVER'],username,password):
-        user=User.query.filter_by(username=username).first()
-        if user:
-          if login_user(DbUser(user)):
-            # do stuff
-            flash("You have logged in")
-            return redirect(url_for("dashboard"))
-      error="Login failed"
-  return render_template("login.html",error=error)
+@app.route('/flashcards/')
+def flashcards():
+    return render_template('flashcards.html')
 
-@app.route('/register',methods=['GET','POST'])
-def register():
-   error=None
-   if request.method=='POST':
-      username=request.form['username']
-      password=request.form['password']
-      user=User(username,password)
-      db.session.add(user)
-      db.session.commit()
-      if user:
-        if login_user(DbUser(user)):
-          # do stuff
-          flash("You have registered in")
-          return redirect(url_for("dashboard"))
-      error="Register failed"
-   return render_template("register.html",error=error)
-
-@app.route("/settings")
-@login_required
-def settings():
-    pass
-
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    flash('You have logged out')
-    return redirect(url_for("home"))
-
-@app.route('/dashboard',methods=['GET','POST'])
+@app.route('/letterrules/')
+def letterrules():
+    return render_template('letter_rules.html')
+@app.route('/dashboard/')
 def dashboard():
     """
     Dashboard
     """
     return render_template("dashboard.html")
+
+@app.route('/questions/', methods=['GET','POST'])
+def questions():
+    if request.method == 'POST':
+        form = request.form
+        name = Response('name', form['name'])
+        live = Response('live', form['live'])
+        age = Response('age', form['age'])
+        time = Response('time', form['time'])
+        db.session.add(name)
+        db.session.add(live)
+        db.session.add(age)
+        db.session.add(time)
+        db.session.commit()
+       
+    return render_template("questions.html")
 
 if __name__=='__main__':
     app.run(port=5555)
